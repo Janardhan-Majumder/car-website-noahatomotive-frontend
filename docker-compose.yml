@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_SOCKET_URL=http://backend:5000
+    depends_on:
+      - backend
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+
+  backend:
+    # Uncomment and configure when you have your backend service
+    # build: ../car-website-noahatomotive-backend
+    # ports:
+    #   - "5000:5000"
+    # environment:
+    #   - NODE_ENV=development
+    # volumes:
+    #   - ../car-website-noahatomotive-backend:/app
+    image: node:18-alpine
+    command: echo "Configure your backend service in docker-compose.yml"
+    ports:
+      - "5000:5000"
+
+networks:
+  default:
+    name: car-website-network
