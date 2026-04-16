@@ -9,7 +9,7 @@ const ConciergeSection = () => {
         <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-20 lg:gap-12">
           
           {/* Left Content Area */}
-          <div className="flex-1 w-full max-w-2xl flex flex-col space-y-12">
+          <div className="flex-1 w-full max-w-2xl flex flex-col space-y-12 px-4 lg:px-2">
             <h2 className="text-[2rem] sm:text-4xl lg:text-[2.75rem] font-bold text-white uppercase tracking-wider leading-[1.3] lg:leading-[1.25]">
               UK’S HIGHEST RATED <br className="hidden sm:block" /> CONCIERGE <br className="hidden sm:block" /> MARKETPLACE
             </h2>

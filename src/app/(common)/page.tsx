@@ -1,5 +1,6 @@
 import Arrivals from '@/components/home/Arrivals';
 import ArrivalsSection from '@/components/home/ArrivalsSection';
+import SubscribeSection from '@/components/home/SubscribeSection';
 import ConciergeSection from '@/components/home/ConciergeSection';
 import BestProductSection from '@/components/home/BestProductSection';
 import CarSection from '@/components/home/CarSection';
@@ -13,6 +14,7 @@ export default function Home() {
       <BestProductSection />
       <ArrivalsSection />
       <ConciergeSection />
+      <SubscribeSection />
     </>
   );
 }
