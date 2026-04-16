@@ -8,7 +8,12 @@ import { HiOutlineUserCircle, HiMenu, HiX } from "react-icons/hi";
 import Link from "next/link";
 import Image from "next/image";
 import { useAuth } from "@/context/AuthContext";
-import { LuLayoutDashboard, LuMegaphone, LuMessageSquare, LuSettings } from "react-icons/lu";
+import {
+  LuLayoutDashboard,
+  LuMegaphone,
+  LuMessageSquare,
+  LuSettings,
+} from "react-icons/lu";
 import { cn } from "@/lib/utils/cn";
 
 const Navbar = ({ className }: { className?: string }) => {
@@ -28,7 +33,7 @@ const Navbar = ({ className }: { className?: string }) => {
     setDrawerOpen(false);
     router.push("/");
   };
-  
+
   const userMenuItems: MenuProps["items"] = [
     {
       key: "profile",
@@ -36,27 +41,29 @@ const Navbar = ({ className }: { className?: string }) => {
       icon: <HiOutlineUserCircle className="w-4 h-4" />,
       onClick: () => router.push("/profile"),
     },
-    ...(user?.role === "admin" ? [
-      {
-        key: "dashboard",
-        label: "Dashboard",
-        icon: <LuLayoutDashboard className="w-4 h-4" />,
-        onClick: () => router.push("/dashboard"),
-      },
-      {
-        key: "advertising",
-        label: "Advertising",
-        icon: <LuMegaphone className="w-4 h-4" />,
-        onClick: () => router.push("/advertising"),
-      },
+    ...(user?.role === "admin"
+      ? [
+          {
+            key: "dashboard",
+            label: "Dashboard",
+            icon: <LuLayoutDashboard className="w-4 h-4" />,
+            onClick: () => router.push("/dashboard"),
+          },
+          {
+            key: "advertising",
+            label: "Advertising",
+            icon: <LuMegaphone className="w-4 h-4" />,
+            onClick: () => router.push("/advertising"),
+          },
 
-      {
-        key: "contacts",
-        label: "Contacts",
-        icon: <LuMessageSquare className="w-4 h-4" />,
-        onClick: () => router.push("/contacts"),
-      }
-    ] : []),
+          {
+            key: "contacts",
+            label: "Contacts",
+            icon: <LuMessageSquare className="w-4 h-4" />,
+            onClick: () => router.push("/contacts"),
+          },
+        ]
+      : []),
     {
       key: "settings",
       label: "Settings",
@@ -108,14 +115,14 @@ const Navbar = ({ className }: { className?: string }) => {
     >
       <div
         className={cn(
-          "bg-white/95 backdrop-blur-md z-[999] transition-all duration-300 sticky top-0 left-0 w-full",
+          "bg-white/95 backdrop-blur-md z-999 transition-all duration-300 sticky top-0 left-0 w-full",
           { "shadow-sm border-b border-gray-100": scrolling },
-          className
+          className,
         )}
       >
-        <div className="container w-full mx-auto px-4 lg:px-6 flex justify-between items-center h-16 sm:h-20">
+        <div className="container w-full mx-auto px-4 lg:px-6 flex justify-between items-center py-2 sm:py-4">
           {/* Logo */}
-          <div className="relative w-28 xl:w-36 h-10 shrink-0">
+          <div className="relative w-24 sm:w-28 h-12 sm:h-14 shrink-0">
             <Link href="/">
               <Image
                 src="/images/logo.png"
@@ -134,8 +141,8 @@ const Navbar = ({ className }: { className?: string }) => {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "text-sm font-medium hover:text-[#0041FF] transition-colors",
-                  pathname === link.href ? "text-[#0041FF]" : "text-gray-500"
+                  "text-sm xl:text-base font-medium hover:text-[#0041FF] transition-colors",
+                  pathname === link.href ? "text-[#0041FF]" : "text-gray-500",
                 )}
               >
                 {link.label}
@@ -162,19 +169,20 @@ const Navbar = ({ className }: { className?: string }) => {
                     }
                     className="shrink-0 bg-blue-50 flex items-center justify-center"
                   />
-                  <span className="text-gray-800 text-sm font-medium truncate max-w-[120px]">
+                  <span className="text-gray-800 text-sm font-medium truncate max-w-30">
                     {userName}
                   </span>
                 </div>
               </Dropdown>
             )}
-              
+
             {!isAuthenticated && (
               <Link href="/sign-in">
                 <Button
                   type="primary"
                   shape="round"
-                  className="bg-[#0041FF] border-none hover:bg-[#0036d6]! text-white h-10 px-8 text-sm font-medium ml-2"
+                  size="large"
+                  className="bg-[#0041FF] border-none hover:bg-[#0036d6]! text-white h-10 px-8! xl:px-10! text-sm font-medium ml-2 pb-0.5!"
                 >
                   Sign in
                 </Button>
@@ -235,9 +243,9 @@ const Navbar = ({ className }: { className?: string }) => {
                   onClick={() => setDrawerOpen(false)}
                   className={cn(
                     "px-4 py-3 rounded-xl transition-colors font-medium text-base",
-                    pathname === link.href 
-                      ? "bg-blue-50 text-[#0041FF]" 
-                      : "text-gray-600 hover:bg-gray-50 hover:text-[#0041FF]"
+                    pathname === link.href
+                      ? "bg-blue-50 text-[#0041FF]"
+                      : "text-gray-600 hover:bg-gray-50 hover:text-[#0041FF]",
                   )}
                 >
                   {link.label}
@@ -246,76 +254,76 @@ const Navbar = ({ className }: { className?: string }) => {
             </nav>
 
             <div className="px-4 py-2">
-                <div className="h-px bg-gray-100 my-2"></div>
-                
-                {isAuthenticated ? (
-                  <>
-                    <div className="flex items-center gap-3 px-4 py-4 mb-2 bg-linear-to-r from-blue-50 to-indigo-50 rounded-xl">
-                      <Avatar
-                        size={40}
-                        src={userAvatarUrl}
-                        icon={
-                          !userAvatarUrl && (
-                            <HiOutlineUserCircle className="text-gray-400 w-6 h-6" />
-                          )
-                        }
-                        className="shrink-0 bg-white border-2 border-white shadow-sm"
-                      />
-                      <div>
-                        <p className="font-semibold text-gray-900 text-sm leading-tight m-0">
-                          {userName}
-                        </p>
-                      </div>
+              <div className="h-px bg-gray-100 my-2"></div>
+
+              {isAuthenticated ? (
+                <>
+                  <div className="flex items-center gap-3 px-4 py-4 mb-2 bg-linear-to-r from-blue-50 to-indigo-50 rounded-xl">
+                    <Avatar
+                      size={40}
+                      src={userAvatarUrl}
+                      icon={
+                        !userAvatarUrl && (
+                          <HiOutlineUserCircle className="text-gray-400 w-6 h-6" />
+                        )
+                      }
+                      className="shrink-0 bg-white border-2 border-white shadow-sm"
+                    />
+                    <div>
+                      <p className="font-semibold text-gray-900 text-sm leading-tight m-0">
+                        {userName}
+                      </p>
                     </div>
-                    
-                    <Link
-                      href="/profile"
-                      onClick={() => setDrawerOpen(false)}
-                      className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-[#0041FF] transition-colors"
-                    >
-                      <HiOutlineUserCircle className="w-5 h-5 text-gray-400" />
-                      <span className="font-medium text-sm">Profile</span>
-                    </Link>
+                  </div>
 
-                    {user?.role === "admin" && (
-                      <>
-                        <Link
-                          href="/dashboard"
-                          onClick={() => setDrawerOpen(false)}
-                          className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-[#0041FF] transition-colors"
-                        >
-                          <LuLayoutDashboard className="w-5 h-5 text-gray-400" />
-                          <span className="font-medium text-sm">Dashboard</span>
-                        </Link>
-                        <Link
-                          href="/advertising"
-                          onClick={() => setDrawerOpen(false)}
-                          className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-[#0041FF] transition-colors"
-                        >
-                          <LuMegaphone className="w-5 h-5 text-gray-400" />
-                          <span className="font-medium text-sm">Advertising</span>
-                        </Link>
-                        <Link
-                          href="/contacts"
-                          onClick={() => setDrawerOpen(false)}
-                          className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-[#0041FF] transition-colors"
-                        >
-                          <LuMessageSquare className="w-5 h-5 text-gray-400" />
-                          <span className="font-medium text-sm">Contacts</span>
-                        </Link>
-                      </>
-                    )}
+                  <Link
+                    href="/profile"
+                    onClick={() => setDrawerOpen(false)}
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-[#0041FF] transition-colors"
+                  >
+                    <HiOutlineUserCircle className="w-5 h-5 text-gray-400" />
+                    <span className="font-medium text-sm">Profile</span>
+                  </Link>
 
-                    <Link
-                      href="/settings"
-                      onClick={() => setDrawerOpen(false)}
-                      className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-[#0041FF] transition-colors"
-                    >
-                      <LuSettings className="w-5 h-5 text-gray-400" />
-                      <span className="font-medium text-sm">Settings</span>
-                    </Link>
-                  </>
-                ) : null}
+                  {user?.role === "admin" && (
+                    <>
+                      <Link
+                        href="/dashboard"
+                        onClick={() => setDrawerOpen(false)}
+                        className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-[#0041FF] transition-colors"
+                      >
+                        <LuLayoutDashboard className="w-5 h-5 text-gray-400" />
+                        <span className="font-medium text-sm">Dashboard</span>
+                      </Link>
+                      <Link
+                        href="/advertising"
+                        onClick={() => setDrawerOpen(false)}
+                        className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-[#0041FF] transition-colors"
+                      >
+                        <LuMegaphone className="w-5 h-5 text-gray-400" />
+                        <span className="font-medium text-sm">Advertising</span>
+                      </Link>
+                      <Link
+                        href="/contacts"
+                        onClick={() => setDrawerOpen(false)}
+                        className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-[#0041FF] transition-colors"
+                      >
+                        <LuMessageSquare className="w-5 h-5 text-gray-400" />
+                        <span className="font-medium text-sm">Contacts</span>
+                      </Link>
+                    </>
+                  )}
+
+                  <Link
+                    href="/settings"
+                    onClick={() => setDrawerOpen(false)}
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-[#0041FF] transition-colors"
+                  >
+                    <LuSettings className="w-5 h-5 text-gray-400" />
+                    <span className="font-medium text-sm">Settings</span>
+                  </Link>
+                </>
+              ) : null}
             </div>
           </div>
 
