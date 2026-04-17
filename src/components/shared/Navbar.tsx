@@ -93,7 +93,7 @@ const Navbar = ({ className }: { className?: string }) => {
 
   const navLinks = [
     { label: "Home", href: "/" },
-    { label: "All products", href: "/products" },
+    { label: "All products", href: "/inventories" },
     { label: "Carts ( 03 )", href: "/cart" },
     { label: "Messages ( 03 )", href: "/messages" },
     { label: "Contact us", href: "/contact" },
@@ -177,7 +177,7 @@ const Navbar = ({ className }: { className?: string }) => {
             )}
 
             {!isAuthenticated && (
-              <Link href="/sign-in">
+              <Link href="/login">
                 <Button
                   type="primary"
                   shape="round"
@@ -337,7 +337,7 @@ const Navbar = ({ className }: { className?: string }) => {
                 Logout
               </button>
             ) : (
-              <Link href="/sign-in" onClick={() => setDrawerOpen(false)}>
+              <Link href="/login" onClick={() => setDrawerOpen(false)}>
                 <Button
                   type="primary"
                   size="large"

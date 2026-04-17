@@ -37,7 +37,7 @@ const HeroSection = () => {
             {/* Actions: Pill Container */}
             <div className="bg-white/95 backdrop-blur-sm rounded-4xl sm:rounded-full p-2 sm:p-2 flex flex-col sm:flex-row gap-2 sm:gap-0 shadow-2xl items-center w-full max-w-xs sm:max-w-[460px] mt-2 sm:mt-4 transition-transform hover:scale-[1.02] duration-300">
               <Link
-                href="/inventory"
+                href="/inventories"
                 className="w-full sm:flex-1 bg-[#0047FF] hover:bg-[#0038cc] text-white px-6 py-3.5 sm:py-4 rounded-full font-medium transition-all duration-300 flex items-center justify-center text-center shadow-lg shadow-blue-500/25 text-sm sm:text-base relative overflow-hidden group"
               >
                 <div className="absolute inset-0 bg-white/20 w-12 skew-x-12 -translate-x-full group-hover:translate-x-[300%] transition-transform duration-700 ease-in-out"></div>
