@@ -1,9 +1,16 @@
-import React from 'react';
-import Link from 'next/link';
+"use client";
+
 import { FaStar } from 'react-icons/fa';
+import { useRouter } from 'next/navigation';
 
 const ProductCard = ({ data }: { data: { images?: string[] } }) => {
+    const router = useRouter();
+    const handleNavigate = (url: string) => {
+        router.push(url);
+    }   
+
     return (
+        
         <div className="w-full bg-white rounded-3xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group p-3 pb-2">
             {/* Image Section */}
             <div className="relative w-full aspect-5/4 bg-gray-100 overflow-hidden rounded-[20px]">
@@ -46,10 +53,11 @@ const ProductCard = ({ data }: { data: { images?: string[] } }) => {
 
                 {/* Action Buttons */}
                 <div className="flex items-center gap-3 mt-4">
-                    <button className="flex-1 bg-[#0047FF] hover:bg-[#0038cc] text-white font-medium py-3 rounded-full transition-colors text-base shadow-sm">
+                    <button className="flex-1 bg-[#0047FF] hover:bg-[#0038cc] text-white font-medium py-3 rounded-full transition-colors text-base shadow-sm cursor-pointer">
                         Buy Now
                     </button>
-                    <button className="flex-1 bg-transparent hover:bg-blue-50 border-[1.5px] border-[#0047FF] text-[#0047FF] font-medium py-3 rounded-full transition-colors text-base">
+                
+                    <button onClick={()=> handleNavigate('/inventories/123')} className="flex-1 bg-transparent hover:bg-blue-50 border-[1.5px] border-[#0047FF] text-[#0047FF] font-medium py-3 rounded-full transition-colors text-base cursor-pointer">
                         Details
                     </button>
                 </div>

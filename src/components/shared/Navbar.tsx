@@ -15,6 +15,7 @@ import {
   LuSettings,
 } from "react-icons/lu";
 import { cn } from "@/lib/utils/cn";
+import { BiPurchaseTag } from "react-icons/bi";
 
 const Navbar = ({ className }: { className?: string }) => {
   const screens = Grid.useBreakpoint();
@@ -43,27 +44,33 @@ const Navbar = ({ className }: { className?: string }) => {
     },
     ...(user?.role === "admin"
       ? [
-          {
-            key: "dashboard",
-            label: "Dashboard",
-            icon: <LuLayoutDashboard className="w-4 h-4" />,
-            onClick: () => router.push("/dashboard"),
-          },
-          {
-            key: "advertising",
-            label: "Advertising",
-            icon: <LuMegaphone className="w-4 h-4" />,
-            onClick: () => router.push("/advertising"),
-          },
+        {
+          key: "dashboard",
+          label: "Dashboard",
+          icon: <LuLayoutDashboard className="w-4 h-4" />,
+          onClick: () => router.push("/dashboard"),
+        },
+        {
+          key: "advertising",
+          label: "Advertising",
+          icon: <LuMegaphone className="w-4 h-4" />,
+          onClick: () => router.push("/advertising"),
+        },
 
-          {
-            key: "contacts",
-            label: "Contacts",
-            icon: <LuMessageSquare className="w-4 h-4" />,
-            onClick: () => router.push("/contacts"),
-          },
-        ]
-      : []),
+        {
+          key: "contacts",
+          label: "Contacts",
+          icon: <LuMessageSquare className="w-4 h-4" />,
+          onClick: () => router.push("/contacts"),
+        },
+      ]
+      : [
+        {
+          key: "My Orders",
+          label: "My Orders",
+          icon: <BiPurchaseTag className="w-4 h-4" />,
+          onClick: () => router.push("/my-orders"),
+        },]),
     {
       key: "settings",
       label: "Settings",
@@ -94,7 +101,7 @@ const Navbar = ({ className }: { className?: string }) => {
   const navLinks = [
     { label: "Home", href: "/" },
     { label: "All products", href: "/inventories" },
-    { label: "Carts ( 03 )", href: "/cart" },
+    { label: "Carts ( 03 )", href: "/my-cart" },
     { label: "Messages ( 03 )", href: "/messages" },
     { label: "Contact us", href: "/contact" },
   ];
@@ -142,7 +149,7 @@ const Navbar = ({ className }: { className?: string }) => {
                 href={link.href}
                 className={cn(
                   "text-sm xl:text-base font-medium hover:text-[#0041FF] transition-colors",
-                  pathname === link.href ? "text-[#0041FF]" : "text-gray-500",
+                  (pathname === "/" && link.href === "/" || link.href !== "/" && pathname.includes(link.href)) ? "text-[#0041FF]" : "text-gray-500",
                 )}
               >
                 {link.label}

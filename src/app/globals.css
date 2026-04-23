@@ -24,3 +24,36 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Custom Ant Design Tabs Styling */
+.custom-antd-tabs .ant-tabs-nav {
+  margin-bottom: 0 !important;
+}
+
+.custom-antd-tabs .ant-tabs-tab {
+  padding: 16px 32px !important;
+  margin: 0 !important;
+  font-size: 1.125rem !important;
+  font-weight: 500 !important;
+  color: #6b7280 !important; /* text-gray-500 */
+  transition: all 0.3s !important;
+  border-radius: 0 !important;
+}
+
+.custom-antd-tabs .ant-tabs-tab-active {
+  background-color: #f3f4f6 !important; /* bg-gray-100 */
+}
+
+.custom-antd-tabs .ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #111827 !important; /* text-gray-900 */
+}
+
+.custom-antd-tabs .ant-tabs-ink-bar {
+  background: #111827 !important; /* gray-900 */
+  height: 2px !important;
+}
+
+.custom-antd-tabs .ant-tabs-nav::before {
+  border-bottom: 1px solid #e5e7eb !important; /* gray-200 */
+}
+
