@@ -1,22 +1,11 @@
 "use client";
-import React from 'react';
 import { Form, Input, Checkbox, Button } from 'antd';
 import Link from 'next/link';
 import { BsEnvelope, BsLock, BsGoogle, BsFacebook } from 'react-icons/bs';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import { DEMO_USER } from '@/constants/test';
 
-// Demo user data — swap this out for a real API call later
-const DEMO_USER = {
-    id: 'demo-001',
-    name: 'John Demo',
-    email: 'john@example.com',
-    role: 'user' as const,
-    isVerified: true,
-    isBlocked: false,
-    avatar: undefined,
-    address: '123 Demo Street, City',
-};
 
 const LoginForm = () => {
     const [form] = Form.useForm();
@@ -69,7 +58,7 @@ const LoginForm = () => {
                     rules={[{ required: true, message: 'Please enter your email' }, { type: 'email' }]}
                     className="mb-6"
                 >
-                    <Input 
+                    <Input
                         prefix={<BsEnvelope className="text-gray-400 mr-2" />}
                         placeholder="john@example.com"
                         className="h-13 bg-gray-50 border-transparent hover:border-blue-200 focus:border-blue-600 focus:bg-white rounded-2xl px-4 text-base transition-all font-medium placeholder:text-gray-300"
@@ -104,9 +93,9 @@ const LoginForm = () => {
 
                 {/* Submit */}
                 <Form.Item className="mb-6">
-                    <Button 
-                        type="primary" 
-                        htmlType="submit" 
+                    <Button
+                        type="primary"
+                        htmlType="submit"
                         className="w-full h-14 bg-[#0041FF] hover:bg-[#0036d6]! border-none rounded-2xl text-lg font-bold shadow-xl shadow-blue-600/20 active:scale-98 transition-all"
                     >
                         Sign In
