@@ -39,9 +39,9 @@ const GlobalModal = ({
       {closeIcon !== false && (
         <button
           onClick={handleCancel}
-          className="absolute top-4 right-8 text-red-500 shadow-inner bg-gray-100/30 rounded-full p-0.5 z-10"
+          className="absolute top-4 right-8 text-red-500 shadow-inner bg-gray-100/30 rounded-full p-1 z-10 size-6 lg:size-7"
         >
-          <CgClose className="w-6" />
+          <CgClose className="size-4 lg:size-5" />
         </button>
       )}
       {children}

@@ -1,5 +1,5 @@
 "use client";
-import { Button, ConfigProvider, Grid, Dropdown, Avatar, Drawer } from "antd";
+import { Button, ConfigProvider, Grid, Dropdown, Avatar, Drawer, Badge, Modal } from "antd";
 import type { MenuProps } from "antd";
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
@@ -9,6 +9,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useAuth } from "@/context/AuthContext";
 import {
+  LuBell,
+  LuCar,
   LuLayoutDashboard,
   LuMegaphone,
   LuMessageSquare,
@@ -16,8 +18,10 @@ import {
 } from "react-icons/lu";
 import { cn } from "@/lib/utils/cn";
 import { BiPurchaseTag } from "react-icons/bi";
+import { FiAlertTriangle } from "react-icons/fi";
 
 const Navbar = ({ className }: { className?: string }) => {
+  const [modal, contextHolder] = Modal.useModal();
   const screens = Grid.useBreakpoint();
   const [scrolling, setScrolling] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -30,18 +34,35 @@ const Navbar = ({ className }: { className?: string }) => {
   const userName = user?.name || "Guest User";
 
   const handleLogout = () => {
-    logout();
-    setDrawerOpen(false);
-    router.push("/");
+    modal.confirm({
+      title: 'Confirm Logout',
+      icon: <FiAlertTriangle className="text-amber-500 text-2xl mr-2" />,
+      content: 'Are you sure you want to log out of your account?',
+      okText: 'Logout',
+      okType: 'danger',
+      cancelText: 'Stay Logged In',
+      centered: true,
+      okButtonProps: { 
+        className: "bg-red-500 hover:bg-red-600 border-none h-10 px-6 rounded-lg font-semibold" 
+      },
+      cancelButtonProps: { 
+        className: "h-10 px-6 rounded-lg font-medium" 
+      },
+      onOk: () => {
+        logout();
+        setDrawerOpen(false);
+        router.push("/");
+      },
+    });
   };
 
   const userMenuItems: MenuProps["items"] = [
-    {
-      key: "profile",
-      label: "Profile",
-      icon: <HiOutlineUserCircle className="w-4 h-4" />,
-      onClick: () => router.push("/profile"),
-    },
+    // {
+    //   key: "profile",
+    //   label: "Profile",
+    //   icon: <HiOutlineUserCircle className="w-4 h-4" />,
+    //   onClick: () => router.push("/profile"),
+    // },
     ...(user?.role === "admin"
       ? [
         {
@@ -70,12 +91,19 @@ const Navbar = ({ className }: { className?: string }) => {
           label: "My Orders",
           icon: <BiPurchaseTag className="w-4 h-4" />,
           onClick: () => router.push("/my-orders"),
-        },]),
+        },
+        {
+          key: "My Products",
+          label: "My Products",
+          icon: <LuCar className="w-4 h-4" />,
+          onClick: () => router.push("/my-products"),
+        },
+      ]),
     {
       key: "settings",
       label: "Settings",
       icon: <LuSettings className="w-4 h-4" />,
-      onClick: () => router.push("/settings"),
+      onClick: () => router.push("/profile"),
     },
     { type: "divider" },
     {
@@ -127,6 +155,7 @@ const Navbar = ({ className }: { className?: string }) => {
           className,
         )}
       >
+        {contextHolder}
         <div className="container w-full mx-auto px-4 lg:px-6 flex justify-between items-center py-2 sm:py-4">
           {/* Logo */}
           <div className="relative w-24 sm:w-28 h-12 sm:h-14 shrink-0">
@@ -158,7 +187,16 @@ const Navbar = ({ className }: { className?: string }) => {
           </div>
 
           {/* ─── Right Section (Desktop) ─── */}
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-4">
+            {/* Notification */}
+            <Link href="/notifications">
+              <button className="relative p-2 rounded-full hover:bg-gray-100 transition-colors cursor-pointer group">
+                <Badge count={3} size="small" offset={[2, 0]}>
+                  <LuBell className="w-6 h-6 text-gray-600 group-hover:text-[#0041FF] transition-colors -mb-1.5" />
+                </Badge>
+              </button>
+            </Link>
+
             {isAuthenticated && (
               <Dropdown
                 menu={{ items: userMenuItems }}
@@ -198,7 +236,14 @@ const Navbar = ({ className }: { className?: string }) => {
           </div>
 
           {/* ─── Mobile: Hamburger ─── */}
-          <div className="lg:hidden flex items-center gap-2">
+          <div className="lg:hidden flex items-center gap-1.5"> {/* Notification */}
+            <Link href="/notifications">
+              <button className="relative p-1 rounded-full hover:bg-gray-100 transition-colors cursor-pointer">
+                <Badge count={3} size="small" offset={[3, 2]}>
+                  <LuBell className="w-5.5 h-5.5 text-gray-700 -mb-1.5" />
+                </Badge>
+              </button>
+            </Link>
             <button
               className="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-100 transition-colors"
               onClick={() => setDrawerOpen(true)}
@@ -206,6 +251,8 @@ const Navbar = ({ className }: { className?: string }) => {
             >
               <HiMenu className="w-6 h-6 text-gray-700" />
             </button>
+
+
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@
 import Container from '@/components/Container';
 import CartList from '@/components/cart/CartList';
 import CartSummary from '@/components/cart/CartSummary';
+import PageHeading from '@/components/ui/PageHeading';
 import { useState } from 'react';
 
 const initialCartItems = [
@@ -44,10 +45,7 @@ const CartPage = () => {
             <Container mClassName='pt-12 pb-24 lg:pt-32 xl:pt-28'>
                 {/* Header */}
                 <div className="mb-10">
-                    <h1 className="text-2xl lg:text-3xl font-bold">
-                        <span className="text-[#0047FF]">My cart</span>
-                        <span className="text-gray-400 font-normal"> / Purchased products or car</span>
-                    </h1>
+                    <PageHeading title="Purchased products or car" backPath="/" />
                 </div>
 
                 {/* Content */}

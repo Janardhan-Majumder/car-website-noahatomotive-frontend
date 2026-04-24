@@ -1,5 +1,8 @@
+"use client";
+
 import Container from '@/components/Container';
 import OrderProgressList from '@/components/cart/OrderProgressList';
+import PageHeading from '@/components/ui/PageHeading';
 
 const ordersData = [
     {
@@ -42,10 +45,7 @@ const MyOrdersPage = () => {
             <Container mClassName="pt-12 pb-24 lg:pt-32 xl:pt-28">
                 {/* Header */}
                 <div className="mb-10">
-                    <h1 className="text-2xl lg:text-3xl font-bold">
-                        <span className="text-gray-400 font-normal">My cart / </span>
-                        <span className="text-[#0047FF]">Purchased products or car</span>
-                    </h1>
+                    <PageHeading title="Purchased products or car" backPath="/my-cart" />
                 </div>
 
                 {/* Order List */}

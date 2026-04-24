@@ -3,6 +3,7 @@
 import Container from '@/components/Container'
 import BillingForm from '@/components/cart/BillingForm'
 import OrderSummary from '@/components/cart/OrderSummary'
+import PageHeading from '@/components/ui/PageHeading'
 import { Form } from 'antd'
 
 const BillingPage = () => {
@@ -39,6 +40,11 @@ const BillingPage = () => {
     return (
         <div className="min-h-screen bg-gray-50/30">
             <Container mClassName='pt-12 pb-24 lg:pt-32 xl:pt-28'>
+                {/* Header */}
+                <div className="mb-10">
+                    <PageHeading title="Billing Information" backPath="/my-cart" />
+                </div>
+
                 <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
                     {/* Left Column: Form */}
                     <div className="w-full lg:w-[65%]">
