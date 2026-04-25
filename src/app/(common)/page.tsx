@@ -1,4 +1,3 @@
-import Arrivals from '@/components/home/Arrivals';
 import ArrivalsSection from '@/components/home/ArrivalsSection';
 import SubscribeSection from '@/components/home/SubscribeSection';
 import ConciergeSection from '@/components/home/ConciergeSection';

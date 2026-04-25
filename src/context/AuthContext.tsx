@@ -2,34 +2,24 @@
 
 import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
 import Cookies from "js-cookie";
-
-export interface AuthUser {
-  id: string;
-  name: string;
-  email: string;
-  role: "admin" | "user";
-  isVerified: boolean;
-  isBlocked: boolean;
-  avatar?: string;
-  address?: string;
-}
+import { User } from "@/types";
 
 interface AuthContextType {
   _id?: string;
-  user: AuthUser | null;
+  user: User | null;
   token: string | null;
   isLoading: boolean;
   isAuthenticated: boolean;
-  login: (token: string, user: AuthUser) => void;
+  login: (token: string, user: User) => void;
   logout: () => void;
-  updateUser: (user: Partial<AuthUser>) => void;
+  updateUser: (user: Partial<User>) => void;
   refreshUser: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<AuthUser | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -44,7 +34,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const storedUser = localStorage.getItem("auth_user");
     if (storedUser) {
       try {
-        const parsedUser: AuthUser = JSON.parse(storedUser);
+        const parsedUser: User = JSON.parse(storedUser);
         setUser(parsedUser);
         setToken(storedToken);
         setIsLoading(false);
@@ -87,7 +77,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     refreshUser();
   }, []);
 
-  const login = (newToken: string, newUser: AuthUser) => {
+  const login = (newToken: string, newUser: User) => {
     Cookies.set("auth_token", newToken, { expires: 7, secure: true, sameSite: "lax" });
     localStorage.setItem("auth_token", newToken);
     localStorage.setItem("auth_user", JSON.stringify(newUser));
@@ -103,7 +93,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null);
   };
 
-  const updateUser = (updates: Partial<AuthUser>) => {
+  const updateUser = (updates: Partial<User>) => {
     setUser((prev) => {
       if (!prev) return null;
       const updated = { ...prev, ...updates };

@@ -60,26 +60,16 @@ export type TPagination = {
 };
 
 
-// export interface User {
-//   id: string;
-//   name: string;
-//   email: string;
-//   role: 'user' | 'admin';
-// }
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: "admin" | "user";
+  isVerified: boolean;
+  isBlocked: boolean;
+  avatar?: string;
+  address?: string;
+}
 
-// export interface Car {
-//   id: string;
-//   name: string;
-//   price: number;
-//   description: string;
-//   image: string;
-//   // Add more fields as needed
-// }
+export * from "./car.type";
 
-// export interface Order {
-//   id: string;
-//   userId: string;
-//   carId: string;
-//   status: 'pending' | 'completed' | 'cancelled';
-//   // etc.
-// }
